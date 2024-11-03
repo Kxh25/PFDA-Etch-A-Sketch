@@ -1,5 +1,5 @@
 # Final Project: Digital Etch A Sketch
-##Etch A Sketch
+## Etch A Sketch
 
 Create a digital etch a sketch that allows the user to draw lines on a screen using two buttons/knobs at the bottom of the screen as their advantage.
 The user should be able to change the color and size of their brush while they are drawing, and then save their work as a png file onto their computer.
