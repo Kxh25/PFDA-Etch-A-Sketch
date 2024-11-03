@@ -1,8 +1,10 @@
-# Final Project: Digital Etch A Sketch
-## Etch A Sketch
+# Final Project: Digital Etch-A-Sketch
+## Etch-A-Sketch
 
 Create a digital etch a sketch that allows the user to draw lines on a screen using two buttons/knobs at the bottom of the screen as their advantage.
 The user should be able to change the color and size of their brush while they are drawing, and then save their work as a png file onto their computer.
+
+![An idea of what the Etch-A-Sketch will look like](https://gvartwork.com/cdn/shop/files/GVEtchASketchAmerica_1260x.jpg?v=1634827223)
 
 The project lists many features. One of the main features includes the drawing aspect. The user will be able to draw a continuous line by either pressing and holding a button, or by draging down a knob, 
 which should affect the line speed. There is a second knob/button that controls the direction the line will move towards (up, down, left, right). The pencil will only move in four directions liek a normal etch-a-sketch.
