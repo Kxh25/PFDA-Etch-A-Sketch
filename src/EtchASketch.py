@@ -34,31 +34,27 @@ def main():
     inner_color = (255, 255, 255)
     
     #border
-    border = 50
+    border = 10
     
     #canvas dimensions
-    canvasWidth = screenWidth - 2 * border
-    canvasHeight = screenHeight - 2 * border
+    canvasWidth = 300
+    canvasHeight = 200
+    canvas = pygame.Surface((canvasWidth, canvasHeight))
 
     running = True
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running == False
+                running = False
         
         screen.fill(background_color)
         
-        #border draw
-        pygame.draw.rect(screen, border_color, (0, 0, screenWidth, border)) #Top
-        pygame.draw.rect(screen, border_color, (0, screenHeight - border,
-                                                screenWidth, border)) #Bottom
-        pygame.draw.rect(screen, border_color, (0, 0, border, screenHeight)) #Left
-        pygame.draw.rect(screen, border_color, (screenWidth - border, 0, 
-                                                border, screenHeight)) #Right
-        #I had to search this up beause I couldn't figure it out
+        #canvas
+        canvas.fill(inner_color)
+        pygame.draw.rect(canvas, inner_color, (300, 0, 90, 90))
 
-        pygame.draw.rect(screen, inner_color, (border, border,
-                                               canvasWidth, canvasHeight))
+        screen.blit(canvas, (100, 100))
+        
         
         pygame.display.flip()
 
