@@ -32,15 +32,22 @@ def main():
     background_color = (255, 0, 0)
     border_color = (0, 0, 0)
     inner_color = (255, 255, 255)
+    button_color = (200, 200, 200)
     
     #border
     border = 10
     
     #canvas dimensions
-    canvasWidth = 300
-    canvasHeight = 200
+    canvasWidth = 700
+    canvasHeight = 300
     canvas = pygame.Surface((canvasWidth, canvasHeight))
 
+    #buttons
+    buttonWidth = 70
+    buttonHeight = 40
+    button = pygame.Surface((buttonWidth, buttonHeight))
+
+    
     running = True
     while running:
         for event in pygame.event.get():
@@ -51,9 +58,10 @@ def main():
         
         #canvas
         canvas.fill(inner_color)
-        pygame.draw.rect(canvas, inner_color, (300, 0, 90, 90))
+        pygame.draw.rect(canvas, inner_color, (500, 300, 90, 90))
 
-        screen.blit(canvas, (100, 100))
+       
+        screen.blit(canvas, (50, 70))
         
         
         pygame.display.flip()
