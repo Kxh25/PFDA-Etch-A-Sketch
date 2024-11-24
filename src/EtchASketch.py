@@ -19,7 +19,7 @@ a speed modifier, a save button, and an ESC button.
 """
 class Canvas:
 
-    def __innit__(self, pos = (0,0), width = 500, height = 300):
+    def __init__(self, pos = (0,0), width = 500, height = 300):
         self.pos = pos
         self.width = width
         self.height = height
@@ -36,7 +36,7 @@ class Canvas:
 
 
 class DrawButton:
-    def __innit__(self, text, x_pos, y_pos, enabled):
+    def __init__(self, text, x_pos, y_pos, enabled):
         self.text = text
         self.x_pos = x_pos
         self.y_pos = y_pos
@@ -44,16 +44,31 @@ class DrawButton:
         self.draw()
 
     def draw(self):
-        button_text = pygame.font.Font.render(self.text, True, 'black')
+        font = pygame.font.Font('freesansbold.ttf', 2)
+        button_text = font.render(self.text, True, 'black')
         button_rect = pygame.rect.Rect((self.x_pos, self.y_pos),(150, 25))
-        pygame.draw.rect(screen, 'gray', button_rect, 0, 5)
+        if self.check_click():
+             pygame.draw.rect(screen, 'dark gray', button_rect, 0, 5)
+        else:
+             pygame.draw.rect(screen, 'light gray', button_rect, 0, 5)
+
         pygame.draw.rect(screen, 'black', button_rect, 2, 5)
         screen.blit(button_text, (self.x_pos, self.y_pos + 3))
+
+    def check_click(self):
+        mouse_pos = pygame.mouse.get_pos()
+        leftClick = pygame.mouse.get_pressed()[0]
+        button_rect = pygame.rect.Rect((self.x_pos, self.y_pos),(150, 25))
+        if leftClick and button_rect.collidepoint(mouse_pos) and self.enabled:
+            return True
+        else:
+            return False
 
 
 pygame.init()
 pygame.display.set_caption("Digital Etch-A-Sketch")
-    
+
+
     #screen Dimensions
 screenWidth = 800
 screenHeight = 600
@@ -72,7 +87,7 @@ border = 10
 #canvasWidth = 700
 #canvasHeight = 300
 #canvas = pygame.Surface((canvasWidth, canvasHeight))
-canvas = Canvas()
+
     #buttons
 buttonWidth = 70
 buttonHeight = 40
@@ -85,6 +100,7 @@ line_color = (0,0,0)
 line_start = (0,0)
 line_end = (0,0)
 
+    #clock
 fps = 60
 timer = pygame.time.Clock()
 
@@ -94,9 +110,13 @@ running = True
 while running:
     screen.fill(background_color)
     timer.tick(fps)
-    canvas.pos = 90, 90
+    canvas = Canvas()
     canvas.draw
+    canvas.pos = 90, 90
+    
     drawbutton = DrawButton('Draw', 10, 10, True)
+    
+    
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -122,17 +142,17 @@ while running:
     #pygame.draw.rect(canvas, inner_color, (500, 300, 90, 90))
 
        #draw Button
-    pygame.draw.rect(button, (200,200,200), (buttonX, buttonY, buttonWidth, buttonHeight))
-    font = pygame.font.Font(None, 30)
-    text = font.render("Draw", True, (0,0,0))
-    text_rect = text.get_rect(center= ((buttonX + buttonWidth // 2),
-                                             (buttonY + buttonHeight // 2)))
-    screen.blit(text, text_rect)
+    #pygame.draw.rect(button, (200,200,200), (buttonX, buttonY, buttonWidth, buttonHeight))
+    #font = pygame.font.Font(None, 30)
+    #text = font.render("Draw", True, (0,0,0))
+    #text_rect = text.get_rect(center= ((buttonX + buttonWidth // 2),
+                                            # (buttonY + buttonHeight // 2)))
+    #screen.blit(text, text_rect)
         
         #screen.blit(canvas, (50, 70))
         
     if lineDraw:
-        pygame.draw.line(canvas, line_color, line_start, line_end, 2)
+        pygame.draw.line(pygame.surface.Surface(canvas), line_color, line_start, line_end, 2)
         
     pygame.display.flip()
 
