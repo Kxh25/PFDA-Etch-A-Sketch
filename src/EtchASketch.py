@@ -1,5 +1,6 @@
 # how do you write code
 import pygame
+import time
 import os
 import turtle
 import tkinter as tk
@@ -46,6 +47,84 @@ class DrawButton:
     def draw(self):
         font = pygame.font.Font('freesansbold.ttf', 2)
         button_text = font.render(self.text, True, 'black')
+        button_rect = pygame.rect.Rect((self.x_pos, self.y_pos),(70, 25))
+        if self.check_click():
+             pygame.draw.rect(screen, 'dark gray', button_rect, 0, 5)
+        else:
+             pygame.draw.rect(screen, 'light gray', button_rect, 0, 5)
+
+        pygame.draw.rect(screen, 'black', button_rect, 2, 5)
+        screen.blit(button_text, (self.x_pos, self.y_pos + 3))
+
+    def check_click(self):
+        mouse_pos = pygame.mouse.get_pos()
+        leftClick = pygame.mouse.get_pressed()[0]
+        button_rect = pygame.rect.Rect((self.x_pos, self.y_pos),(150, 25))
+        if leftClick and button_rect.collidepoint(mouse_pos) and self.enabled:
+            return True
+        else:
+            return False
+    
+    def line_draw(self, s, e, p):
+        x = s[0] * (1-p) + e[0] * p
+        y = s[1] * (1-p) + e[1] * p 
+        pygame.draw.line(screen, 'black', s, (round(x), round(y)))
+      
+    def line_print(self):
+        line_start = (100,100)
+        line_end = (500, 300)
+        line_printed = False
+        if self.check_click:
+            line_printed = True
+            
+            if line_printed:
+                line = pygame.draw.line(screen, 'black', line_start, line_end, 2)
+                screen.blit(line)
+        else:
+            line_printed = False
+            
+
+
+class DirectionButton:
+    def __init__(self, text, x_pos, y_pos, enabled):
+        self.text = text
+        self.x_pos = x_pos
+        self.y_pos = y_pos
+        self.enabled = enabled
+        self.draw()
+
+    def draw(self):
+        font = pygame.font.Font('freesansbold.ttf', 2)
+        button_text = font.render(self.text, True, 'black')
+        button_rect = pygame.rect.Rect((self.x_pos, self.y_pos),(70, 25))
+        if self.check_click():
+             pygame.draw.rect(screen, 'dark gray', button_rect, 0, 5)
+        else:
+             pygame.draw.rect(screen, 'light gray', button_rect, 0, 5)
+
+        pygame.draw.rect(screen, 'black', button_rect, 2, 5)
+        screen.blit(button_text, (self.x_pos, self.y_pos + 3))
+
+    def check_click(self):
+        mouse_pos = pygame.mouse.get_pos()
+        leftClick = pygame.mouse.get_pressed()[0]
+        button_rect = pygame.rect.Rect((self.x_pos, self.y_pos),(150, 25))
+        if leftClick and button_rect.collidepoint(mouse_pos) and self.enabled:
+            return True
+        else:
+            return False
+
+class SizeButton:
+    def __init__(self, text, x_pos, y_pos, enabled):
+        self.text = text
+        self.x_pos = x_pos
+        self.y_pos = y_pos
+        self.enabled = enabled
+        self.draw()
+
+    def draw(self):
+        font = pygame.font.Font('freesansbold.ttf', 2)
+        button_text = font.render(self.text, True, 'black')
         button_rect = pygame.rect.Rect((self.x_pos, self.y_pos),(150, 25))
         if self.check_click():
              pygame.draw.rect(screen, 'dark gray', button_rect, 0, 5)
@@ -64,7 +143,92 @@ class DrawButton:
         else:
             return False
 
+class ColorButton:
+    def __init__(self, text, x_pos, y_pos, enabled):
+        self.text = text
+        self.x_pos = x_pos
+        self.y_pos = y_pos
+        self.enabled = enabled
+        self.draw()
 
+    def draw(self):
+        font = pygame.font.Font('freesansbold.ttf', 2)
+        button_text = font.render(self.text, True, 'black')
+        button_rect = pygame.rect.Rect((self.x_pos, self.y_pos),(150, 25))
+        if self.check_click():
+             pygame.draw.rect(screen, 'dark gray', button_rect, 0, 5)
+        else:
+             pygame.draw.rect(screen, 'light gray', button_rect, 0, 5)
+
+        pygame.draw.rect(screen, 'black', button_rect, 2, 5)
+        screen.blit(button_text, (self.x_pos, self.y_pos + 3))
+
+    def check_click(self):
+        mouse_pos = pygame.mouse.get_pos()
+        leftClick = pygame.mouse.get_pressed()[0]
+        button_rect = pygame.rect.Rect((self.x_pos, self.y_pos),(150, 25))
+        if leftClick and button_rect.collidepoint(mouse_pos) and self.enabled:
+            return True
+        else:
+            return False
+
+class SpeedButton:
+    def __init__(self, text, x_pos, y_pos, enabled):
+        self.text = text
+        self.x_pos = x_pos
+        self.y_pos = y_pos
+        self.enabled = enabled
+        self.draw()
+
+    def draw(self):
+        font = pygame.font.Font('freesansbold.ttf', 2)
+        button_text = font.render(self.text, True, 'black')
+        button_rect = pygame.rect.Rect((self.x_pos, self.y_pos),(150, 25))
+        if self.check_click():
+             pygame.draw.rect(screen, 'dark gray', button_rect, 0, 5)
+        else:
+             pygame.draw.rect(screen, 'light gray', button_rect, 0, 5)
+
+        pygame.draw.rect(screen, 'black', button_rect, 2, 5)
+        screen.blit(button_text, (self.x_pos, self.y_pos + 3))
+
+    def check_click(self):
+        mouse_pos = pygame.mouse.get_pos()
+        leftClick = pygame.mouse.get_pressed()[0]
+        button_rect = pygame.rect.Rect((self.x_pos, self.y_pos),(150, 25))
+        if leftClick and button_rect.collidepoint(mouse_pos) and self.enabled:
+            return True
+        else:
+            return False
+
+class SaveButton:
+    def __init__(self, text, x_pos, y_pos, enabled):
+        self.text = text
+        self.x_pos = x_pos
+        self.y_pos = y_pos
+        self.enabled = enabled
+        self.draw()
+
+    def draw(self):
+        font = pygame.font.Font('freesansbold.ttf', 2)
+        button_text = font.render(self.text, True, 'black')
+        button_rect = pygame.rect.Rect((self.x_pos, self.y_pos),(150, 25))
+        if self.check_click():
+             pygame.draw.rect(screen, 'dark gray', button_rect, 0, 5)
+        else:
+             pygame.draw.rect(screen, 'light gray', button_rect, 0, 5)
+
+        pygame.draw.rect(screen, 'black', button_rect, 2, 5)
+        screen.blit(button_text, (self.x_pos, self.y_pos + 3))
+
+    def check_click(self):
+        mouse_pos = pygame.mouse.get_pos()
+        leftClick = pygame.mouse.get_pressed()[0]
+        button_rect = pygame.rect.Rect((self.x_pos, self.y_pos),(150, 25))
+        if leftClick and button_rect.collidepoint(mouse_pos) and self.enabled:
+            return True
+        else:
+            return False
 pygame.init()
 pygame.display.set_caption("Digital Etch-A-Sketch")
 
@@ -114,27 +278,18 @@ while running:
     canvas.draw
     canvas.pos = 90, 90
     
-    drawbutton = DrawButton('Draw', 10, 10, True)
-    
+    drawbutton = DrawButton('Draw', 10, 500, True)
+    directionButton = DirectionButton('Change', 100, 500, True)
+    sizeButton = SizeButton('Size', 600, 150, True)
+    colorButton = ColorButton('Color', 600, 230, True)
+    speedButton = SpeedButton('speed', 600, 300, True)
     
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
             
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:
-                mouse_x, mouse_y = pygame.mouse.get_pos()
-                if buttonX <= mouse_x <= buttonX + buttonWidth and \
-                buttonY <= mouse_y <= buttonY + buttonHeight:
-                    lineDraw = True
-                    line_start = (mouse_x, mouse_y)
-        if event.type == pygame.MOUSEBUTTONUP:
-            if event.button == 1:
-                lineDraw = False
-        if event.type == pygame.MOUSEMOTION and lineDraw:
-            line_end = pygame.mouse.get_pos()
-        
+       
     
         
         #canvas
