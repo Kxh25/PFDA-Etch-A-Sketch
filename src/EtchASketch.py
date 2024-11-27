@@ -36,6 +36,7 @@ class Canvas:
         screen.blit(self.surface, self.pos)
 
 
+   
 class DrawButton:
     def __init__(self, text, x_pos, y_pos, enabled):
         self.text = text
@@ -45,11 +46,12 @@ class DrawButton:
         self.draw()
 
     def draw(self):
-        font = pygame.font.Font('freesansbold.ttf', 2)
+        font = pygame.font.Font(None, 30)
         button_text = font.render(self.text, True, 'black')
         button_rect = pygame.rect.Rect((self.x_pos, self.y_pos),(70, 25))
         if self.check_click():
              pygame.draw.rect(screen, 'dark gray', button_rect, 0, 5)
+             turtle.listen()
         else:
              pygame.draw.rect(screen, 'light gray', button_rect, 0, 5)
 
@@ -66,22 +68,28 @@ class DrawButton:
             return False
     
     def line_draw(self, s, e, p):
-        x = s[0] * (1-p) + e[0] * p
-        y = s[1] * (1-p) + e[1] * p 
-        pygame.draw.line(screen, 'black', s, (round(x), round(y)))
+        line = turtle.Turtle()
+        line.speed(0)
+        line.forward(100)
+
+        
+
+        
+        
+    
       
-    def line_print(self):
-        line_start = (100,100)
-        line_end = (500, 300)
-        line_printed = False
-        if self.check_click:
-            line_printed = True
+    #def line_print(self):
+    #    line_start = (100,100)
+    #    line_end = (500, 300)
+    #    line_printed = False
+    #    if self.check_click:
+    #        line_printed = True
             
-            if line_printed:
-                line = pygame.draw.line(screen, 'black', line_start, line_end, 2)
-                screen.blit(line)
-        else:
-            line_printed = False
+    #        if line_printed:
+    #            line = pygame.draw.line(screen, 'black', line_start, line_end, 2)
+    #            screen.blit(line)
+    #    else:
+    #        line_printed = False
             
 
 
@@ -312,13 +320,15 @@ while running:
     pygame.display.flip()
 
 pygame.quit()
+turtle.done()
 
 
 
 
 
 
-
+def draw_button():
+    
 
 
 
