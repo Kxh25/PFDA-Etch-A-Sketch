@@ -3,8 +3,6 @@ import os
 
 
 line = turtle.Turtle()
-line.shape('turtle')
-line.color('black')
 
 click_count = 0
 def main():
@@ -19,7 +17,12 @@ def main():
     canvas()
     draw_button()
     direction_button()
+    color_button()
+    
+    line.shape('turtle')
+    line.color('black')
 
+    
     turtle.penup()
     turtle.goto(0,0)
     turtle.pendown()
@@ -69,6 +72,53 @@ def draw_click(x, y):
         elif click_count > 4:
             click_count = 0
 
+    if 250 <= x <= 300 and 60 <= y <= 110:
+        print("Color Button Clicked!")
+        color_change()
+
+    
+def color_change():
+    global click_count
+    click_count += 1
+    if click_count == 0:
+        color = 'black'
+        line.color = 'black'
+        return color
+    elif click_count == 1:
+        color = 'red'
+        line.color = 'red'
+        return color
+    elif click_count == 2:
+        color = 'orange'
+        line.color = 'orange'
+        return color
+    elif click_count == 3:
+        color = 'yellow'
+        line.color = 'yellow'
+        return color
+    elif click_count == 4:
+        color = 'green'
+        line.color = 'green'
+        return color
+    elif click_count == 5:
+        color = 'blue'
+        line.color = 'blue'
+        return color
+    elif click_count == 6:
+        color = 'purple'
+        line.color = 'purple'
+        return color
+    elif click_count == 7:
+        color = 'pink'
+        line.color = 'pink'
+        return color
+    elif click_count == 8:
+        color = 'brown'
+        line.color = 'brown'
+        return color
+    elif click_count > 8:
+        click_count = 0
+        return color
     
 
 
@@ -109,6 +159,38 @@ def direction_button():
     turtle.goto(-120, -190) 
     turtle.write("Direction", align='center', font=('Arial', 12, 'normal'))
 
+def color_button():
+    turtle.penup()
+    turtle.goto(250, 130)
+    turtle.pendown()
+    turtle.fillcolor('light gray')
+    turtle.begin_fill()
+
+    for i in range(2):
+        turtle.forward(70)
+        turtle.right(90)
+        turtle.forward(50)
+        turtle.right(90)
+
+    turtle.end_fill()
+    turtle.penup()
+    turtle.goto(280, 110) 
+    turtle.write("Color", align='center', font=('Arial', 12, 'bold'))
+
+    turtle.penup()
+    turtle.goto(250, 80)
+    turtle.pendown()
+    turtle.fillcolor('dark gray')
+    turtle.begin_fill()
+    for e in range(2):
+        turtle.forward(70)
+        turtle.right(90)
+        turtle.forward(40)
+        turtle.right(90)
+    turtle.end_fill()
+    turtle.penup()
+    turtle.goto(280, 60)
+    turtle.write(color_change(), align = 'center', font=('Arial', 12, 'bold'))
 
 if __name__ == "__main__":
     main()
