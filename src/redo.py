@@ -18,9 +18,11 @@ def main():
     draw_button()
     direction_button()
     color_button()
-    
+    size_button()
+    speed_button()
     line.shape('turtle')
-    line.color('black')
+    
+    
 
     
     turtle.penup()
@@ -29,9 +31,6 @@ def main():
     turtle.onscreenclick(draw_click)
 
     turtle.done()
-
-
-
 
 
 def canvas():
@@ -50,8 +49,7 @@ def canvas():
     turtle.penup()
 
 def draw_click(x, y):
-    global click_count
-    click_count += 1
+    
     
     #draw button
     if -250 <= x <= -200 and -170 <= y <= -100:
@@ -59,70 +57,131 @@ def draw_click(x, y):
         line.forward(20)
         
     #direction button
-    if -150 <= x <= -100 and -170 <= y <= -100:
+    elif -150 <= x <= -100 and -170 <= y <= -100:
         print("Direction Button clicked!")
-        if click_count == 1:
-            line.setheading(0)
-        elif click_count == 2:
-            line.setheading(90)
-        elif click_count == 3:
-            line.setheading(180)
-        elif click_count == 4:
-            line.setheading(270)
-        elif click_count > 4:
-            click_count = 0
+        movement
 
-    if 250 <= x <= 300 and 60 <= y <= 110:
+    elif 250 <= x <= 300 and 60 <= y <= 110:
         print("Color Button Clicked!")
-        color_change()
+        color_change
 
-    
+    elif 250 <= x <= 300 and -50 <= y <= 0:
+        print("Size Button clicked!")
+        change_size
+
+    elif 250 <= x <= 300 and -180 <= y <= -150:
+        print("Speed Button clicked!")
+        speed_change
+
+
+def movement():
+    global click_count
+    click_count += 1
+    if click_count == 1:
+            line.setheading(0)
+    elif click_count == 2:
+        line.setheading(90)
+    elif click_count == 3:
+        line.setheading(180)
+    elif click_count == 4:
+        line.setheading(270)
+    elif click_count > 4:
+        click_count = 0
+
 def color_change():
     global click_count
     click_count += 1
-    if click_count == 0:
-        color = 'black'
-        line.color = 'black'
-        return color
-    elif click_count == 1:
-        color = 'red'
-        line.color = 'red'
-        return color
+    
+    color = ['black', 'red', 'orange', 'yellow', 'green', 'blue',
+             'purple', 'pink', 'brown']
+    #color = [(0,0,0), (255,0,0), (236,98,0), (255,239,0), (0,255,0), (0,0,255),
+             #(118,0,255), (254,101,225), (115,57,0)]
+    
+    
+    line.pencolor('black')
+
+    if click_count == 1:
+        linecolor = 'red'
+        line.pencolor('red')
+        return linecolor
     elif click_count == 2:
-        color = 'orange'
-        line.color = 'orange'
-        return color
+        linecolor = 'orange'
+        line.pencolor('orange')
+        return linecolor
     elif click_count == 3:
-        color = 'yellow'
-        line.color = 'yellow'
-        return color
+        linecolor = 'yellow'
+        line.pencolor('yellow')
+        return linecolor
     elif click_count == 4:
-        color = 'green'
-        line.color = 'green'
-        return color
+        linecolor = 'green'
+        line.pencolor('green')
+        return linecolor
     elif click_count == 5:
-        color = 'blue'
-        line.color = 'blue'
-        return color
+        linecolor = 'blue'
+        line.pencolor('blue')
+        return linecolor
     elif click_count == 6:
-        color = 'purple'
-        line.color = 'purple'
-        return color
+        linecolor = 'purple'
+        line.pencolor('purple')
+        return linecolor
     elif click_count == 7:
-        color = 'pink'
-        line.color = 'pink'
-        return color
+        linecolor = 'pink'
+        line.pencolor('pink')
+        return linecolor
     elif click_count == 8:
-        color = 'brown'
-        line.color = 'brown'
-        return color
+        linecolor = 'brown'
+        line.pencolor('brown')
+        return linecolor
     elif click_count > 8:
         click_count = 0
-        return color
+        linecolor = 'black'
+        return linecolor
     
+def speed_change():
+    global click_count
+    click_count += 1
+    speed = [4, 5, 6, 7, 8]
+    line.speed(speed[0])
+    
+    if click_count == 1:
+        line.speed(speed[1])
+    elif click_count == 2:
+        line.speed(speed[2])
+    elif click_count == 3:
+        line.speed(speed[3])
+    elif click_count == 4:
+        line.speed(speed[4])
+    elif click_count > 4:
+        click_count = 0
 
 
+def change_size():
+    global click_count
+    click_count += 1
+    up = '2'
+    size_point = [1, 2, 3, 4, 5]
+    line.pensize(size_point[1])
+    if click_count == 1:
+        line.pensize(size_point[2])
+        up = '3'
+        return up
+    elif click_count ==2:
+        line.pensize(size_point[3])
+        up = '4'
+        return up
+    elif click_count == 3:
+        line.pensize(size_point[4])
+        up = '5'
+        return up
+    elif click_count == 4:
+        line.pensize(size_point[0])
+        up = '1'
+        return up
+    elif click_count > 4:
+        click_count = 0
 
+
+#buttons
 def draw_button():
     turtle.penup()
     turtle.goto(-250, -150)
@@ -177,20 +236,95 @@ def color_button():
     turtle.goto(280, 110) 
     turtle.write("Color", align='center', font=('Arial', 12, 'bold'))
 
+    #box underneath button
     turtle.penup()
     turtle.goto(250, 80)
+    turtle.pendown()
+    turtle.fillcolor(color_change())
+    turtle.begin_fill()
+    for e in range(2):
+        turtle.forward(70)
+        turtle.right(90)
+        turtle.forward(30)
+        turtle.right(90)
+    turtle.end_fill()
+    #turtle.penup()
+    #turtle.goto(280, 60)
+    #turtle.write(color_change(), align = 'center', font=('Arial', 12, 'bold'))
+
+def size_button():
+    turtle.penup()
+    turtle.goto(250, 0)
+    turtle.pendown()
+    turtle.fillcolor('light gray')
+    turtle.begin_fill()
+
+    for i in range(2):
+        turtle.forward(70)
+        turtle.right(90)
+        turtle.forward(50)
+        turtle.right(90)
+
+    turtle.end_fill()
+    turtle.penup()
+    turtle.goto(280, -20) 
+    turtle.write("Size", align='center', font=('Arial', 12, 'bold'))
+
+    #box underneath button
+    turtle.penup()
+    turtle.goto(250, -50)
     turtle.pendown()
     turtle.fillcolor('dark gray')
     turtle.begin_fill()
     for e in range(2):
         turtle.forward(70)
         turtle.right(90)
-        turtle.forward(40)
+        turtle.forward(30)
         turtle.right(90)
     turtle.end_fill()
     turtle.penup()
-    turtle.goto(280, 60)
-    turtle.write(color_change(), align = 'center', font=('Arial', 12, 'bold'))
+    turtle.goto(280, -70)
+    line.color('white')
+    turtle.write(change_size(), align='center', font=('Arial', 12, 'bold'))
+    line.color('black')
+    line.pencolor('black')
+
+def speed_button():
+    turtle.penup()
+    turtle.goto(250, -140)
+    turtle.pendown()
+    turtle.fillcolor('light gray')
+    turtle.begin_fill()
+
+    for i in range(2):
+        turtle.forward(70)
+        turtle.right(90)
+        turtle.forward(50)
+        turtle.right(90)
+
+    turtle.end_fill()
+    turtle.penup()
+    turtle.goto(280, -165) 
+    turtle.write("Speed", align='center', font=('Arial', 12, 'bold'))
+
+    #box underneath button
+    turtle.penup()
+    turtle.goto(250, -190)
+    turtle.pendown()
+    turtle.fillcolor('dark gray')
+    turtle.begin_fill()
+    for e in range(2):
+        turtle.forward(70)
+        turtle.right(90)
+        turtle.forward(30)
+        turtle.right(90)
+    turtle.end_fill()
+    turtle.penup()
+    turtle.goto(280, -200)
+    line.color('white')
+    turtle.write(speed_change, align='center', font=('Arial', 12, 'bold'))
+    line.color('black')
+    line.pencolor('black')
 
 if __name__ == "__main__":
     main()
