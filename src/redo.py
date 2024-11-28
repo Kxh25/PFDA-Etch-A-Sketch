@@ -1,8 +1,14 @@
 import turtle
 import os
+from PIL import Image
+
 
 
 line = turtle.Turtle()
+
+color_text = 'black'
+size_text = '2'
+speed_text = '4'
 
 click_count = 0
 def main():
@@ -14,16 +20,17 @@ def main():
     screen = turtle.Screen()
     screen.bgcolor('red')
     turtle.showturtle()
+    
     canvas()
     draw_button()
     direction_button()
     color_button()
     size_button()
     speed_button()
+    clear_button()
+    save_button()
     line.shape('turtle')
     
-    
-
     
     turtle.penup()
     turtle.goto(0,0)
@@ -33,47 +40,66 @@ def main():
     turtle.done()
 
 
+
 def canvas():
+    turtle.speed(0)
     turtle.penup()
     turtle.goto(-300, 200)
     turtle.pendown()
     turtle.fillcolor('white')
+    turtle.pensize(4)
     turtle.begin_fill()
 
     for i in range (2):
         turtle.forward(500)
         turtle.right(90)
-        turtle.forward(300)
+        turtle.forward(320)
         turtle.right(90)
     turtle.end_fill()
+    turtle.pensize(2)
     turtle.penup()
 
 def draw_click(x, y):
     
     
     #draw button
-    if -250 <= x <= -200 and -170 <= y <= -100:
+    if -250 <= x <= -200 and -190 <= y <= -100:
         print("Draw Button clicked!")
-        line.forward(20)
+        line.forward(30)
         
     #direction button
-    elif -150 <= x <= -100 and -170 <= y <= -100:
+    elif -150 <= x <= -70 and -190 <= y <= -100:
         print("Direction Button clicked!")
-        movement
+        movement()
 
-    elif 250 <= x <= 300 and 60 <= y <= 110:
+    #color button
+    elif 250 <= x <= 320 and 60 <= y <= 130:
         print("Color Button Clicked!")
-        color_change
+        color_change()
+        
 
-    elif 250 <= x <= 300 and -50 <= y <= 0:
+    #size button
+    elif 250 <= x <= 320 and -50 <= y <= 0:
         print("Size Button clicked!")
-        change_size
+        change_size()
 
-    elif 250 <= x <= 300 and -180 <= y <= -150:
+    #speed button
+    elif 250 <= x <= 320 and -180 <= y <= -150:
         print("Speed Button clicked!")
-        speed_change
+        speed_change()
+
+    #Clear button
+    elif 0 <= x <= 50 and -190 <= y <= -100:
+        print("Clear Button clicked!")
+        travel_change()
+
+    #save button
+    elif 270 <= x <= 320 and 220 <= y <= 250:
+        print("Save Button clicked!")
+        save()
 
 
+#changes
 def movement():
     global click_count
     click_count += 1
@@ -154,7 +180,6 @@ def speed_change():
     elif click_count > 4:
         click_count = 0
 
-
 def change_size():
     global click_count
     click_count += 1
@@ -180,13 +205,30 @@ def change_size():
     elif click_count > 4:
         click_count = 0
 
+def travel_change():
+   line.clear()
+   line.penup()
+   line.goto(0,0)
+   line.pendown()
+  
+def save():
+    line.hideturtle()
+    canvas = turtle.getcanvas()
+    canvas.postscript(file="test.eps")
+
+    img = Image.open("test.eps")
+    img.save("test.png")
+    line.showturtle()
+    
+    
 
 #buttons
 def draw_button():
+    
     turtle.penup()
     turtle.goto(-250, -150)
     turtle.pendown()
-    turtle.fillcolor('light gray')
+    turtle.fillcolor('#a9ea04')
     turtle.begin_fill()
 
     for i in range(2):
@@ -197,32 +239,32 @@ def draw_button():
 
     turtle.end_fill()
     turtle.penup()
-    turtle.goto(-230, -170) 
-    turtle.write("Draw", align='center', font=('Arial', 12, 'normal'))
+    turtle.goto(-220, -180) 
+    turtle.write("Draw", align='center', font=('Trebuchet MS', 12, 'normal'))
 
 def direction_button():
     turtle.penup()
     turtle.goto(-150, -150)
     turtle.pendown()
-    turtle.fillcolor('light gray')
+    turtle.fillcolor('#ffa804')
     turtle.begin_fill()
 
     for i in range(2):
-        turtle.forward(50)
+        turtle.forward(90)
         turtle.right(90)
         turtle.forward(50)
         turtle.right(90)
 
     turtle.end_fill()
     turtle.penup()
-    turtle.goto(-120, -190) 
-    turtle.write("Direction", align='center', font=('Arial', 12, 'normal'))
+    turtle.goto(-110, -180) 
+    turtle.write("Direction", align='center', font=('Trebuchet MS', 12, 'normal'))
 
 def color_button():
     turtle.penup()
     turtle.goto(250, 130)
     turtle.pendown()
-    turtle.fillcolor('light gray')
+    turtle.fillcolor('#de22ef')
     turtle.begin_fill()
 
     for i in range(2):
@@ -235,22 +277,6 @@ def color_button():
     turtle.penup()
     turtle.goto(280, 110) 
     turtle.write("Color", align='center', font=('Arial', 12, 'bold'))
-
-    #box underneath button
-    turtle.penup()
-    turtle.goto(250, 80)
-    turtle.pendown()
-    turtle.fillcolor(color_change())
-    turtle.begin_fill()
-    for e in range(2):
-        turtle.forward(70)
-        turtle.right(90)
-        turtle.forward(30)
-        turtle.right(90)
-    turtle.end_fill()
-    #turtle.penup()
-    #turtle.goto(280, 60)
-    #turtle.write(color_change(), align = 'center', font=('Arial', 12, 'bold'))
 
 def size_button():
     turtle.penup()
@@ -270,30 +296,11 @@ def size_button():
     turtle.goto(280, -20) 
     turtle.write("Size", align='center', font=('Arial', 12, 'bold'))
 
-    #box underneath button
-    turtle.penup()
-    turtle.goto(250, -50)
-    turtle.pendown()
-    turtle.fillcolor('dark gray')
-    turtle.begin_fill()
-    for e in range(2):
-        turtle.forward(70)
-        turtle.right(90)
-        turtle.forward(30)
-        turtle.right(90)
-    turtle.end_fill()
-    turtle.penup()
-    turtle.goto(280, -70)
-    line.color('white')
-    turtle.write(change_size(), align='center', font=('Arial', 12, 'bold'))
-    line.color('black')
-    line.pencolor('black')
-
 def speed_button():
     turtle.penup()
     turtle.goto(250, -140)
     turtle.pendown()
-    turtle.fillcolor('light gray')
+    turtle.fillcolor('#f3f3f2')
     turtle.begin_fill()
 
     for i in range(2):
@@ -307,24 +314,42 @@ def speed_button():
     turtle.goto(280, -165) 
     turtle.write("Speed", align='center', font=('Arial', 12, 'bold'))
 
-    #box underneath button
+def clear_button():
     turtle.penup()
-    turtle.goto(250, -190)
+    turtle.goto(0, -150)
     turtle.pendown()
-    turtle.fillcolor('dark gray')
+    turtle.fillcolor('#620504')
     turtle.begin_fill()
-    for e in range(2):
+
+    for i in range(2):
         turtle.forward(70)
+        turtle.right(90)
+        turtle.forward(50)
+        turtle.right(90)
+
+    turtle.end_fill()
+    turtle.penup()
+    turtle.goto(35, -170) 
+    turtle.write("Clear", align='center', font=('Verdana', 12, 'bold'))
+
+def save_button():
+    turtle.penup()
+    turtle.goto(270, 250)
+    turtle.pendown()
+    turtle.fillcolor('#ff5775')
+    turtle.begin_fill()
+
+    for i in range(2):
+        turtle.forward(50)
         turtle.right(90)
         turtle.forward(30)
         turtle.right(90)
+
     turtle.end_fill()
     turtle.penup()
-    turtle.goto(280, -200)
-    line.color('white')
-    turtle.write(speed_change, align='center', font=('Arial', 12, 'bold'))
-    line.color('black')
-    line.pencolor('black')
+    turtle.goto(290, 220) 
+    turtle.write("Save", align='center', font=('Arial', 12, 'bold'))
+
 
 if __name__ == "__main__":
     main()
