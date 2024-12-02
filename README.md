@@ -10,10 +10,10 @@ moves. There is also a **clear** button that will clear the screen of any lines 
 And finally, there is a save button that will remove the cursor and save your drawing onto your computer.
 
 The repository SRC folder contains many different program files: 
-  -A *EtchASketch_attempt1.py* attempt at the program using the **pygame** library.
-  -A *test.py* program used to test out creating buttons
-  -A *sketch.py* program used to test out drawing lines using the terminal. (Came from a video tutorial)
-  -A *Etch-A-Sketch_Final.py* program that contains the final code using the **turtle** library.
+  - A *EtchASketch_attempt1.py* attempt at the program using the **pygame** library.
+  - A *test.py* program used to test out creating buttons
+  - A *sketch.py* program used to test out drawing lines using the terminal. (Came from a video tutorial)
+  - A *Etch-A-Sketch_Final.py* program that contains the final code using the **turtle** library.
 The repository also contains extra files of renamed programs, or scrapped files that are not in use.
 
 I chose to do an etch-a-sketch for my final because programming is not m strong suit. I can confidently say this because I have taken other
